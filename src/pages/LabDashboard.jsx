@@ -1,10 +1,54 @@
 import React, { useState, useEffect } from 'react';
 import {
   FileText, CheckCircle, Beaker, Loader2, RefreshCw,
-  MapPin, Upload, FileCheck, ExternalLink, ImageOff, ShieldCheck, Calendar
+  MapPin, Upload, FileCheck, ExternalLink, ImageOff, ShieldCheck, Calendar,
+  QrCode, Copy, ExternalLink as OpenIcon
 } from 'lucide-react';
+import { QRCodeCanvas } from 'qrcode.react';
 import { getContract, getReadOnlyContract, BATCH_ID_START } from '../utils/contract';
 import { uploadPdfToPinata, fetchBatchMetadata, ipfsUrl } from '../utils/pinata';
+
+const BatchQRCard = ({ batchId }) => {
+  const [copied, setCopied] = useState(false);
+  const trackUrl = `${window.location.origin}/track?id=${batchId}`;
+
+  const copyLink = () => {
+    navigator.clipboard.writeText(trackUrl).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
+  };
+
+  return (
+    <div className="bg-white rounded-2xl border border-stone-100 p-5">
+      <h3 className="text-sm font-semibold text-stone-900 mb-4 flex items-center gap-2">
+        <QrCode size={15} className="text-green-600" /> Batch QR Code
+      </h3>
+      <div className="flex flex-col items-center gap-3">
+        <div className="bg-stone-50 border border-stone-100 rounded-xl p-3">
+          <QRCodeCanvas value={trackUrl} size={160} level="H" includeMargin={false} />
+        </div>
+        <p className="text-[10px] font-mono text-stone-400 break-all text-center px-1">{trackUrl}</p>
+        <div className="flex gap-2 w-full">
+          <button
+            onClick={copyLink}
+            className="flex-1 flex items-center justify-center gap-1.5 bg-stone-50 border border-stone-200 text-stone-700 py-2 rounded-xl text-xs font-semibold hover:bg-stone-100 transition"
+          >
+            <Copy size={12} />
+            {copied ? 'Copied!' : 'Copy Link'}
+          </button>
+          <button
+            onClick={() => window.open(trackUrl, '_blank')}
+            className="flex-1 flex items-center justify-center gap-1.5 bg-green-700 text-white py-2 rounded-xl text-xs font-semibold hover:bg-green-800 transition"
+          >
+            <OpenIcon size={12} />
+            Open Track Page
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const ImageWithFallback = ({ ipfsHash, alt }) => {
   const [src, setSrc] = useState(null);
@@ -332,6 +376,9 @@ const LabDashboard = () => {
                 )}
               </div>
             )}
+
+            {/* QR Code */}
+            <BatchQRCard batchId={selectedBatch.id} />
 
           </div>
         )}
