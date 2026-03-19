@@ -5,30 +5,8 @@ import {
 } from 'lucide-react';
 import { getReadOnlyContract } from '../utils/contract';
 import { fetchBatchMetadata, ipfsUrl } from '../utils/pinata';
+import ImageWithFallback from '../components/ImageWithFallback';
 
-const ImageWithFallback = ({ ipfsHash, alt }) => {
-  const [src, setSrc] = useState(null);
-  const [err, setErr] = useState(false);
-
-  useEffect(() => {
-    if (!ipfsHash) { setErr(true); return; }
-    const clean = String(ipfsHash).replace("ipfs://", "").trim();
-    setSrc(clean.startsWith("http") ? clean : `https://dweb.link/ipfs/${clean}`);
-  }, [ipfsHash]);
-
-  const handleError = () => {
-    if (src?.includes("dweb.link")) {
-      setSrc(`https://ipfs.io/ipfs/${src.split("/ipfs/")[1]}`);
-    } else setErr(true);
-  };
-
-  if (err) return (
-    <div className="w-full h-full bg-stone-100 flex items-center justify-center text-stone-400">
-      <ImageOff size={28} />
-    </div>
-  );
-  return <img src={src} alt={alt} onError={handleError} className="w-full h-full object-cover" />;
-};
 
 const Track = ({ prefillId }) => {
   const [searchId, setSearchId] = useState(prefillId || '');

@@ -7,6 +7,7 @@ import {
 import { QRCodeCanvas } from 'qrcode.react';
 import { getContract, getReadOnlyContract, BATCH_ID_START } from '../utils/contract';
 import { fetchBatchMetadata, ipfsUrl } from '../utils/pinata';
+import ImageWithFallback from '../components/ImageWithFallback';
 
 const BatchQRCard = ({ batchId }) => {
   const [copied, setCopied] = useState(false);
@@ -50,28 +51,6 @@ const BatchQRCard = ({ batchId }) => {
   );
 };
 
-const ImageWithFallback = ({ ipfsHash, alt }) => {
-  const [src, setSrc] = useState(null);
-  const [err, setErr] = useState(false);
-
-  useEffect(() => {
-    if (!ipfsHash) { setErr(true); return; }
-    const clean = String(ipfsHash).replace("ipfs://", "").trim();
-    setSrc(clean.startsWith("http") ? clean : `https://dweb.link/ipfs/${clean}`);
-  }, [ipfsHash]);
-
-  const handleError = () => {
-    if (src?.includes("dweb.link")) setSrc(`https://ipfs.io/ipfs/${src.split("/ipfs/")[1]}`);
-    else setErr(true);
-  };
-
-  if (err) return (
-    <div className="w-full h-full bg-stone-100 flex items-center justify-center text-stone-400">
-      <ImageOff size={32} className="opacity-40" />
-    </div>
-  );
-  return <img src={src} alt={alt} onError={handleError} className="w-full h-full object-cover" />;
-};
 
 const Distributor = () => {
   const [batches, setBatches] = useState([]);
@@ -180,8 +159,8 @@ const Distributor = () => {
                 key={batch.id}
                 onClick={() => setSelectedBatch(batch)}
                 className={`w-full text-left px-4 py-3 border-b border-stone-50 transition-colors ${selectedBatch?.id === batch.id
-                    ? 'bg-purple-50 border-l-2 border-l-purple-500'
-                    : 'hover:bg-stone-50'
+                  ? 'bg-purple-50 border-l-2 border-l-purple-500'
+                  : 'hover:bg-stone-50'
                   }`}
               >
                 <div className="flex items-start justify-between gap-2">
@@ -192,8 +171,8 @@ const Distributor = () => {
                     </p>
                   </div>
                   <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full border whitespace-nowrap ${batch.stage >= 3
-                      ? 'bg-green-50 text-green-700 border-green-200'
-                      : 'bg-amber-50 text-amber-700 border-amber-200'
+                    ? 'bg-green-50 text-green-700 border-green-200'
+                    : 'bg-amber-50 text-amber-700 border-amber-200'
                     }`}>
                     {batch.stage >= 3 ? 'Shipped' : 'Ready'}
                   </span>
