@@ -143,6 +143,13 @@ const LabDashboard = () => {
       const contract = await getContract();
       if (!contract) throw new Error("Wallet not connected!");
 
+      // Contract requires Stage 1 (Processed) before verifyBatch() can be called
+      if (selectedBatch.stage < 1) {
+        setStatusText("Marking batch as Processed...");
+        const stageTx = await contract.updateStage(selectedBatch.id, 1);
+        await stageTx.wait();
+      }
+
       let reportIPFS = "No_Report_Uploaded";
       if (reportFile) {
         setStatusText("Uploading PDF to IPFS...");
@@ -158,7 +165,7 @@ const LabDashboard = () => {
       fetchBatches();
     } catch (error) {
       console.error(error);
-      alert("❌ Failed: " + error.message);
+      alert("❌ Failed: " + (error.reason || error.message));
     } finally {
       setLoading(false);
       setStatusText("");
