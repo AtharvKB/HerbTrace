@@ -197,6 +197,9 @@ export const getReadOnlyContract = async () => {
 
 // ─── Write contract (MetaMask required) ─────────────────────────────────────
 // Used by Lab, Farmer, Distributor pages that need to sign transactions.
+// Automatically switches MetaMask to Sepolia testnet if needed.
+const SEPOLIA_CHAIN_ID = "0xaa36a7"; // 11155111 in hex
+
 export const getContract = async () => {
   if (!window.ethereum) {
     alert("MetaMask not detected! Please install MetaMask to perform this action.");
@@ -204,6 +207,35 @@ export const getContract = async () => {
   }
   try {
     await window.ethereum.request({ method: 'eth_requestAccounts' });
+
+    // Check if MetaMask is on Sepolia, switch if not
+    const currentChainId = await window.ethereum.request({ method: 'eth_chainId' });
+    if (currentChainId !== SEPOLIA_CHAIN_ID) {
+      try {
+        await window.ethereum.request({
+          method: 'wallet_switchEthereumChain',
+          params: [{ chainId: SEPOLIA_CHAIN_ID }],
+        });
+      } catch (switchError) {
+        // If Sepolia is not added to MetaMask, add it
+        if (switchError.code === 4902) {
+          await window.ethereum.request({
+            method: 'wallet_addEthereumChain',
+            params: [{
+              chainId: SEPOLIA_CHAIN_ID,
+              chainName: 'Sepolia Testnet',
+              nativeCurrency: { name: 'SepoliaETH', symbol: 'ETH', decimals: 18 },
+              rpcUrls: ['https://sepolia.drpc.org'],
+              blockExplorerUrls: ['https://sepolia.etherscan.io'],
+            }],
+          });
+        } else {
+          alert("Please switch to Sepolia testnet in MetaMask to continue.");
+          return null;
+        }
+      }
+    }
+
     const provider = new ethers.BrowserProvider(window.ethereum);
     const signer = await provider.getSigner();
     return new ethers.Contract(CONTRACT_ADDRESS, CONTRACT_ABI, signer);

@@ -51,7 +51,7 @@ const Farmer = () => {
       data.append("farmerName", "Verified Farmer");
 
       const response = await axios.post(
-        "https://alene-supergenual-inexpressibly.ngrok-free.dev/api/add-batch",
+        "https://herbal-blockchain.onrender.com/api/add-batch",
         data,
         {
           headers: {
@@ -94,7 +94,9 @@ const Farmer = () => {
 
     } catch (error) {
       console.error("Error:", error);
-      const msg = error.response?.data?.error || error.message || "Transaction failed";
+      console.error("Response data:", error.response?.data);
+      console.error("Response status:", error.response?.status);
+      const msg = error.response?.data?.error || error.response?.data?.message || JSON.stringify(error.response?.data) || error.message || "Transaction failed";
       alert("❌ Error: " + msg);
     } finally {
       setLoading(false);
