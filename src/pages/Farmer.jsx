@@ -50,13 +50,13 @@ const Farmer = () => {
       data.append("location", formData.location);
       data.append("farmerName", "Verified Farmer");
 
+      const API_URL = import.meta.env.VITE_API_URL || "https://herbal-blockchain.onrender.com";
       const response = await axios.post(
-        "https://herbal-blockchain.onrender.com/api/add-batch",
+        `${API_URL}/api/add-batch`,
         data,
         {
           headers: {
             "Content-Type": "multipart/form-data",
-            "ngrok-skip-browser-warning": "true"
           }
         }
       );

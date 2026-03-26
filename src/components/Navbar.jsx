@@ -30,9 +30,7 @@ const Navbar = () => {
 
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2 font-semibold text-stone-900 hover:text-green-700 transition-colors">
-          <div className="w-7 h-7 bg-green-700 rounded-lg flex items-center justify-center">
-            <Leaf size={14} className="text-white" />
-          </div>
+          <img src="/logo.png" alt="HerbTrace" className="w-9 h-9 object-contain" />
           <span className="tracking-tight">HerbTrace</span>
         </Link>
 
