@@ -1,0 +1,64 @@
+﻿[dotenv@17.2.3] injecting env (2) from .env -- tip: ΓÜÖ∩╕Å  specify custom .env file path with { path: '/custom/path/.env' }
+===========================================
+  HerbChain - Sepolia Batch Query
+  Contract: 0x437B1696B0E67a1430f5486583971D4520af93e1
+  Next Batch ID: 106
+===========================================
+
+Total batches created: 5
+
+--- Batch #101 ---
+  Metadata CID : QmViKxXbQHc41f1NgVBugH9g1eA1QQmAeQ6gffnnC5MT2w
+  Farmer       : 0x29cEcB30b0fCD1af2106BACC9F36708629aFE717
+  Stage        : Verified (2)
+  Lab Report   : YES
+    Report IPFS: QmQ8kCjkiAmPVoQdDQY3jB8pGxCDBRw5FDTSChxVoTp4Ls
+    Purity     : 55
+    Notes      : dil H2SO4
+    Lab Tech   : 0x29cEcB30b0fCD1af2106BACC9F36708629aFE717
+    Timestamp  : 2026-02-22T17:31:24.000Z
+
+--- Batch #102 ---
+  Metadata CID : QmPn8o812JL6vKsbzhhKYxTBMCWcLnH1NaBQYWyC2ZEJ61
+  Farmer       : 0x29cEcB30b0fCD1af2106BACC9F36708629aFE717
+  Stage        : Verified (2)
+  Lab Report   : YES
+    Report IPFS: QmQ8kCjkiAmPVoQdDQY3jB8pGxCDBRw5FDTSChxVoTp4Ls
+    Purity     : 75
+    Notes      : Dil HCL
+    Lab Tech   : 0x29cEcB30b0fCD1af2106BACC9F36708629aFE717
+    Timestamp  : 2026-02-22T17:39:24.000Z
+
+--- Batch #103 ---
+  Metadata CID : QmPJBPsn7TffbLKrEQ2cFbw1tmcEqWN1DPcQXs6S65nkWw
+  Farmer       : 0x29cEcB30b0fCD1af2106BACC9F36708629aFE717
+  Stage        : Verified (2)
+  Lab Report   : YES
+    Report IPFS: QmQ8kCjkiAmPVoQdDQY3jB8pGxCDBRw5FDTSChxVoTp4Ls
+    Purity     : 86
+    Notes      : zinc
+    Lab Tech   : 0x29cEcB30b0fCD1af2106BACC9F36708629aFE717
+    Timestamp  : 2026-02-22T17:49:24.000Z
+
+--- Batch #104 ---
+  Metadata CID : QmYsfvm4WvDwwBrRYxyCAdYsFXHXwjK8n8C5t62P5iyDnZ
+  Farmer       : 0x29cEcB30b0fCD1af2106BACC9F36708629aFE717
+  Stage        : Verified (2)
+  Lab Report   : YES
+    Report IPFS: QmQ8kCjkiAmPVoQdDQY3jB8pGxCDBRw5FDTSChxVoTp4Ls
+    Purity     : 91
+    Notes      : iron
+    Lab Tech   : 0x29cEcB30b0fCD1af2106BACC9F36708629aFE717
+    Timestamp  : 2026-02-22T17:57:00.000Z
+
+--- Batch #105 ---
+  Metadata CID : QmQUtxZS32kkWCDMrDRQzvwqjqpWTsnS64KXojoACdE3ZT
+  Farmer       : 0x29cEcB30b0fCD1af2106BACC9F36708629aFE717
+  Stage        : Sold (3)
+  Lab Report   : YES
+    Report IPFS: QmZF8pTv7iHFTPwoETzbMJ8mvWU25aGt34c7KRbxmhUgM3
+    Purity     : 57
+    Notes      : h2so4
+    Lab Tech   : 0x29cEcB30b0fCD1af2106BACC9F36708629aFE717
+    Timestamp  : 2026-02-22T18:06:12.000Z
+
